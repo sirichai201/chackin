@@ -7,7 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'drawerbar_lecturer.dart';
-import 'edit_profile.dart';
+
+import 'edit_profile_lecturer.dart';
 
 class profile_lecturer extends StatefulWidget {
   @override
@@ -126,11 +127,6 @@ class _profile_lecturerState extends State<profile_lecturer> {
             'Email: ${_userData['email']}',
             style: const TextStyle(fontSize: 16),
           ),
-          const SizedBox(height: 10),
-          Text(
-            'รหัสนิสิต: ${_userData['studentId']}',
-            style: const TextStyle(fontSize: 16),
-          ),
           const SizedBox(height: 25),
           ElevatedButton(
             onPressed: _navigateToEditProfile,
@@ -146,7 +142,7 @@ class _profile_lecturerState extends State<profile_lecturer> {
     var result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EditProfile(userData: _userData),
+        builder: (context) => EditProfileLecturer(userData: _userData),
       ),
     );
     if (result != null) {

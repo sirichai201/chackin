@@ -7,19 +7,20 @@ import 'package:image_picker/image_picker.dart';
 
 import '../screen_login_user_all/login.dart';
 
-class EditProfile extends StatefulWidget {
+class EditProfileLecturer extends StatefulWidget {
   final Map<String, dynamic> userData;
-  EditProfile({required this.userData});
+  EditProfileLecturer({required this.userData});
   @override
-  _EditProfileState createState() => _EditProfileState();
+  _EditProfileLecturerState createState() => _EditProfileLecturerState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditProfileLecturerState extends State<EditProfileLecturer> {
   late TextEditingController _nameController;
   late TextEditingController _passwordController;
   File? _selectedImage;
   Map<String, dynamic> _userData = {};
-  bool _isLoadingImage = true; // New state variable to track image loading
+  bool _isLoadingImage = true; // State variable to track initial image loading
+  bool _isUploadingImage = false; // State variable to track image upload
 
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _EditProfileState extends State<EditProfile> {
 
   Future<void> _pickImage() async {
     setState(() {
-      _isLoadingImage = true;
+      _isUploadingImage = true;
     });
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -67,7 +68,14 @@ class _EditProfileState extends State<EditProfile> {
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({'imageURL': url});
+      setState(() {
+        _isUploadingImage = false;
+      });
       _loadUserData();
+    } else {
+      setState(() {
+        _isUploadingImage = false;
+      });
     }
   }
 
@@ -91,9 +99,6 @@ class _EditProfileState extends State<EditProfile> {
           const SizedBox(height: 20),
           _buildNonEditableTextField('Email:', widget.userData['email']),
           const SizedBox(height: 20),
-          _buildNonEditableTextField(
-              'Student ID:', widget.userData['studentId']),
-          const SizedBox(height: 20),
           _buildEditableTextField('Password:', _passwordController),
           const SizedBox(height: 20),
           ElevatedButton(
@@ -110,7 +115,7 @@ class _EditProfileState extends State<EditProfile> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          _isLoadingImage
+          _isUploadingImage
               ? const CircleAvatar(
                   radius: 100,
                   child: CircularProgressIndicator(),

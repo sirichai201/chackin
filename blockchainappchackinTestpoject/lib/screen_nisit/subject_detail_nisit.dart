@@ -342,6 +342,41 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
     );
   }
 
+// Add the checkInDialog function here:
+  Future<void> checkInDialog(String status, String actionName) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm $actionName'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to $actionName?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                checkIn(status);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -361,7 +396,7 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
                     MainAxisAlignment.spaceEvenly, // จัดวาง button ให้อยู่กลาง
                 children: [
                   ElevatedButton(
-                    onPressed: () => checkIn('attended'),
+                    onPressed: () => checkInDialog('attended', 'มาเรียน'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -376,7 +411,7 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
                         style: TextStyle(color: Colors.white, fontSize: 18)),
                   ),
                   ElevatedButton(
-                    onPressed: () => checkIn('leave'),
+                    onPressed: () => checkInDialog('leave', 'ลา'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           const Color.fromARGB(255, 40, 29, 139)),

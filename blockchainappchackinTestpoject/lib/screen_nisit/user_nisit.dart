@@ -114,7 +114,7 @@ class _UserNisitState extends State<UserNisit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("UserNisit"),
+        title: const Text("วิชาเรียน"),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
