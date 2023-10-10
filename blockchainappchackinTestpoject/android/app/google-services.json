@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "200114184201",
+    "firebase_url": "https://projectblockchainapp-9defb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "projectblockchainapp-9defb",
+    "storage_bucket": "projectblockchainapp-9defb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200114184201:android:ef5233804b2051be1c98d8",
+        "android_client_info": {
+          "package_name": "com.example.blockchainappchackin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHjjkMgtog2evKuAa22ENXoQ79WkexUQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
