@@ -88,7 +88,11 @@ class _UserLecturerState extends State<UserLecturer> {
                   ),
                   TextField(
                     controller: yearController,
-                    decoration: const InputDecoration(labelText: 'ปีการศึกษา'),
+                    decoration: InputDecoration(
+                      labelText: 'ปีการศึกษา',
+                      hintText:
+                          'กรุณาใส่เป็น คศ เช่น 2023', // บรรทัดนี้เป็นการเพิ่มข้อความบอก
+                    ),
                     keyboardType: TextInputType.number,
                   ),
                   DropdownButton<String>(
@@ -154,7 +158,7 @@ class _UserLecturerState extends State<UserLecturer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Lecturer'),
+        title: const Text('วิชาเรียน'),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

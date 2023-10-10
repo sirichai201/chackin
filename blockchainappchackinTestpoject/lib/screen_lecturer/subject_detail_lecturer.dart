@@ -87,15 +87,18 @@ class _SubjectDetailState extends State<SubjectDetail> {
           List<dynamic> pendingStudents = subject['pendingStudents'] ?? [];
           List<dynamic> approvedStudents = subject['students'] ?? [];
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _inviteCodeDisplay(subject),
-              SizedBox(height: 16.0),
-              _pendingStudentsDropdown(pendingStudents),
-              SizedBox(height: 16.0),
-              _approvedStudentsDropdown(approvedStudents),
-            ],
+          return Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 16.0),
+                _inviteCodeDisplay(subject),
+                SizedBox(height: 50.0),
+                _pendingStudentsDropdown(pendingStudents),
+                SizedBox(height: 16.0),
+                _approvedStudentsDropdown(approvedStudents),
+              ],
+            ),
           );
         },
       ),
@@ -121,7 +124,7 @@ class _SubjectDetailState extends State<SubjectDetail> {
         border: Border.all(color: Colors.orangeAccent),
       ),
       child: DropdownButton<dynamic>(
-        hint: Text('Pending Students:'),
+        hint: Text('นิสิตรอยืนยัน:'),
         onChanged: (value) {},
         items: pendingStudents.map((student) {
           return DropdownMenuItem<dynamic>(
@@ -154,7 +157,7 @@ class _SubjectDetailState extends State<SubjectDetail> {
         border: Border.all(color: Colors.greenAccent),
       ),
       child: DropdownButton<dynamic>(
-        hint: Text('Approved Students:'),
+        hint: Text('นิสิตที่ยืนยันแล้ว:'),
         onChanged: (value) {},
         items: approvedStudents.map((student) {
           return DropdownMenuItem<dynamic>(

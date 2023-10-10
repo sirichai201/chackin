@@ -19,6 +19,8 @@ class _EditProfileState extends State<EditProfile> {
   late TextEditingController _passwordController;
   File? _selectedImage;
   Map<String, dynamic> _userData = {};
+  bool _isLoadingImage = true; // State variable to track initial image loading
+  bool _isUploadingImage = false; // State variable to track image upload
 
   @override
   void initState() {
@@ -29,8 +31,7 @@ class _EditProfileState extends State<EditProfile> {
 
   void _initializeControllers() {
     _nameController = TextEditingController(text: widget.userData['Username']);
-    _passwordController =
-        TextEditingController(); // สร้าง Controller สำหรับ password
+    _passwordController = TextEditingController();
   }
 
   Future<void> _loadUserData() async {
@@ -41,21 +42,22 @@ class _EditProfileState extends State<EditProfile> {
     if (mounted) {
       setState(() {
         _userData = userData.data() as Map<String, dynamic>;
+        _isLoadingImage = false; // Set to false after loading user data
       });
     }
-    print(
-        _userData['imageURL']); // ทดสอบว่า URL ของรูปภาพมีการเปลี่ยนแปลงหรือไม่
+    print(_userData['imageURL']);
   }
 
   Future<void> _pickImage() async {
+    setState(() {
+      _isUploadingImage = true;
+    });
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      if (mounted) {
-        setState(() {
-          _selectedImage = File(pickedFile.path);
-        });
-      }
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
       final ref = FirebaseStorage.instance
           .ref()
           .child('userImages')
@@ -66,7 +68,14 @@ class _EditProfileState extends State<EditProfile> {
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({'imageURL': url});
+      setState(() {
+        _isUploadingImage = false;
+      });
       _loadUserData();
+    } else {
+      setState(() {
+        _isUploadingImage = false;
+      });
     }
   }
 
@@ -93,8 +102,7 @@ class _EditProfileState extends State<EditProfile> {
           _buildNonEditableTextField(
               'Student ID:', widget.userData['studentId']),
           const SizedBox(height: 20),
-          _buildEditableTextField(
-              'Password:', _passwordController), // เพิ่มฟิลด์ Password
+          _buildEditableTextField('Password:', _passwordController),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _saveProfileChanges,
@@ -110,17 +118,23 @@ class _EditProfileState extends State<EditProfile> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          _userData.containsKey('imageURL') &&
-                  _userData['imageURL'] != null &&
-                  _userData['imageURL'].isNotEmpty
-              ? CircleAvatar(
+          _isUploadingImage
+              ? const CircleAvatar(
                   radius: 100,
-                  backgroundImage: NetworkImage(_userData['imageURL']),
+                  child: CircularProgressIndicator(),
+                  backgroundColor: Color.fromARGB(255, 248, 245, 245),
                 )
-              : const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage('assets/images/Profile.png'),
-                ),
+              : _userData.containsKey('imageURL') &&
+                      _userData['imageURL'] != null &&
+                      _userData['imageURL'].isNotEmpty
+                  ? CircleAvatar(
+                      radius: 100,
+                      backgroundImage: NetworkImage(_userData['imageURL']),
+                    )
+                  : const CircleAvatar(
+                      radius: 100,
+                      backgroundImage: AssetImage('assets/images/Profile.png'),
+                    ),
           Positioned(
             bottom: 0,
             right: 0,
@@ -168,7 +182,7 @@ class _EditProfileState extends State<EditProfile> {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 8.0),
         TextField(
-          enabled: false, // ทำให้ไม่สามารถแก้ไขได้
+          enabled: false,
           controller: TextEditingController(text: value),
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
@@ -186,22 +200,16 @@ class _EditProfileState extends State<EditProfile> {
           .update({
         'Username': _nameController.text,
       });
-      // ส่งค่า true กลับไปยังหน้าที่เปิดมา
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('ข้อมูลถูกอัพเดทแล้ว!')),
       );
       Navigator.of(context).pop(true);
-      // ถ้าผู้ใช้ต้องการเปลี่ยนรหัสผ่าน
       if (_passwordController.text.isNotEmpty) {
         final confirm = await _showConfirmationDialog(context);
         if (confirm) {
           await FirebaseAuth.instance.currentUser!
               .updatePassword(_passwordController.text);
-
-          // Sign out ผู้ใช้
           await FirebaseAuth.instance.signOut();
-
-          // ทำการ pop ทุกหน้าที่อยู่ใน stack และ push ไปหน้า login
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Login()),
             (route) => false,

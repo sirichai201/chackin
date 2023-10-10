@@ -86,9 +86,9 @@ class _profile_lecturerState extends State<profile_lecturer> {
                 ),
           const SizedBox(height: 25),
           const Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: FractionalTranslation(
-              translation: Offset(0.2, 0.0),
+              translation: Offset(0.0, 0.0),
               child: Text(
                 'ข้อมูลบัญชี',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -117,7 +117,7 @@ class _profile_lecturerState extends State<profile_lecturer> {
         children: [
           const SizedBox(height: 15),
           Text(
-            'ชื่อนาสกุล: ${_userData['Username']}',
+            'ชื่อนามสกุล: ${_userData['Username']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),

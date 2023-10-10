@@ -22,11 +22,12 @@ class _UserNisitState extends State<UserNisit> {
   void initState() {
     super.initState();
     currentUserUid = _auth.currentUser!.uid;
-    initUserEthereumAddress();
+    initUserEthereumAddress(context);
+
     fetchSubjects();
   }
 
-  Future<void> initUserEthereumAddress() async {
+  Future<void> initUserEthereumAddress(BuildContext context) async {
     try {
       final userDoc = await FirebaseFirestore.instance
           .collection('users')
@@ -39,7 +40,7 @@ class _UserNisitState extends State<UserNisit> {
           data['ethereumAddress'] != null) {
         print('User has Ethereum Address: ${data['ethereumAddress']}');
       } else {
-        final url = Uri.parse('http:localhost:3000/createEthereumAddress');
+        final url = Uri.parse('http://10.0.2.2:3000/createEthereumAddress');
         final response = await http.post(
           url,
           headers: {'Content-Type': 'application/json'},
@@ -59,6 +60,13 @@ class _UserNisitState extends State<UserNisit> {
           }, SetOptions(merge: true));
 
           print('Created and set new Ethereum Address: $newEthereumAddress');
+
+          // แสดง snackbar
+          final snackBar = SnackBar(
+            content: Text('Ethereum Address ถูกสร้างเสร็จสิ้น!'),
+            duration: Duration(seconds: 3),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else {
           print('Failed to create Ethereum Address: ${response.body}');
         }
@@ -210,7 +218,7 @@ class _UserNisitState extends State<UserNisit> {
       builder: (context) {
         return AlertDialog(
           title: const Text('ยืนยัน'),
-          content: Text('คุณต้องการลบวิชา $subjectId, $subjectName หรือไม่?'),
+          content: Text('คุณต้องการลบวิชา  $subjectName หรือไม่?'),
           actions: <Widget>[
             TextButton(
               child: const Text('ไม่'),
