@@ -257,8 +257,8 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
     print('Sending Ether to address: $receiverAddress...');
     print('Inside sendEther function with address: $receiverAddress');
 
-    //final url = 'http://192.168.1.2:3000/sendEther';
-    final url = 'http://10.0.2.2:3000/sendEther';
+    final url = 'http://192.168.1.2:3000/sendEther';
+    //final url = 'http://10.0.2.2:3000/sendEther';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -290,8 +290,8 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
   Future<void> getBalance(String ethAddress) async {
     print('Fetching balance for Ethereum address: $ethAddress...');
 
-    //final url = 'http://192.168.1.2:3000/getBalance/$ethAddress';
-    final url = 'http://10.0.2.2:3000/getBalance/$ethAddress';
+    final url = 'http://192.168.1.2:3000/getBalance/$ethAddress';
+    //final url = 'http://10.0.2.2:3000/getBalance/$ethAddress';
     final response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200) {

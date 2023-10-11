@@ -40,7 +40,8 @@ class _UserNisitState extends State<UserNisit> {
           data['ethereumAddress'] != null) {
         print('User has Ethereum Address: ${data['ethereumAddress']}');
       } else {
-        final url = Uri.parse('http://10.0.2.2:3000/createEthereumAddress');
+        final url = Uri.parse('http://192.168.1.2:3000/sendEther');
+        //final url = Uri.parse('http://10.0.2.2:3000/createEthereumAddress');
         final response = await http.post(
           url,
           headers: {'Content-Type': 'application/json'},
