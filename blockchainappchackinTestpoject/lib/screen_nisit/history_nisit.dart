@@ -284,10 +284,12 @@ class _HistoryNisitState extends State<HistoryNisit> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                          'ชื่อ: ${attendance['name'] ?? 'ไม่มีข้อมูล'}'),
-                                      Text(
-                                          'รหัสนิสิต: ${attendance['studentId'] ?? 'ไม่มีข้อมูล'}'),
+                                      Flexible(
+                                          child: Text(
+                                              'ชื่อ: ${attendance['name'] ?? 'ไม่มีข้อมูล'}')),
+                                      Flexible(
+                                          child: Text(
+                                              'รหัสนิสิต: ${attendance['studentId'] ?? 'ไม่มีข้อมูล'}')),
                                     ],
                                   ),
                                   const SizedBox(height: 8.0),
@@ -323,51 +325,53 @@ class _HistoryNisitState extends State<HistoryNisit> {
                                   ),
                                   const SizedBox(
                                     height: 8.0,
-                                    width: 20,
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'ยอดเงินคงเหลือ: ',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${attendance['balanceInEther'] ?? 'ไม่มีข้อมูล'}',
-                                              style: const TextStyle(
-                                                  color: Colors.green),
-                                            ),
-                                          ],
+                                      Flexible(
+                                        child: RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              const TextSpan(
+                                                text: 'ยอดเงินคงเหลือ: ',
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    '${attendance['balanceInEther'] ?? 'ไม่มีข้อมูล'}',
+                                                style: const TextStyle(
+                                                    color: Colors.green),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'ที่ได้รับ: ',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${attendance['rewardAmount'] ?? 'ไม่มีข้อมูล'}',
-                                              style: const TextStyle(
-                                                  color: Colors.green),
-                                            ),
-                                          ],
+                                      Flexible(
+                                        child: RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              const TextSpan(
+                                                text: 'ที่ได้รับ: ',
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    '${attendance['rewardAmount'] ?? 'ไม่มีข้อมูล'}',
+                                                style: const TextStyle(
+                                                    color: Colors.green),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(
                                     height: 8.0,
-                                    width: 20,
                                   ),
                                   Text(
                                       'เวลา: ${_formatTimestamp(attendance['time'] as Timestamp)}'),

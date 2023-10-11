@@ -50,7 +50,7 @@ class DrawerbarLecturer extends StatelessWidget {
             ),
           ),
           _buildDrawerItem(
-            title: 'วิชาเรียน',
+            title: 'Class',
             icon: Icons.book,
             onTap: () => Navigator.pushReplacement(
               context,

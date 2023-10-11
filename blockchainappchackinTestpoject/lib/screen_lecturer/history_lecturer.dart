@@ -95,7 +95,8 @@ class _HistoryState extends State<History> {
 
           currentCheckedStudents.add(absentStudentData);
           // อัปเดตข้อมูลเข้าฝั่งนิสิต
-          await _updateStudentRecord(absentStudentData, studentUid);
+          await _updateStudentRecord(
+              absentStudentData, studentUid, selectedSubjectDocId);
         }
       }
 
@@ -108,13 +109,13 @@ class _HistoryState extends State<History> {
     });
   }
 
-  Future<void> _updateStudentRecord(
-      Map<String, dynamic> checkInData, String studentUid) async {
+  Future<void> _updateStudentRecord(Map<String, dynamic> checkInData,
+      String studentUid, String selectedSubjectDocId) async {
     final studentSubjectRef = _firestore
         .collection('users')
         .doc(studentUid) // ใช้ uid ของนิสิตเป็น document ID
         .collection('enrolledSubjects')
-        .doc(selectedSubject);
+        .doc(selectedSubjectDocId);
 
     final studentAttendanceScheduleRef = studentSubjectRef
         .collection('attendanceSchedulesRecords')
@@ -192,7 +193,6 @@ class _HistoryState extends State<History> {
     String formattedSelectedDate =
         DateFormat('yyyy-MM-dd').format(selectedDate);
 
-    // ขั้นตอนที่ 1: ดึง document ของวิชา
     final subjectQuery = FirebaseFirestore.instance
         .collection('users')
         .doc(userDocId)
@@ -211,10 +211,6 @@ class _HistoryState extends State<History> {
     }
 
     final selectedSubjectDocId = subjectQuerySnapshot.docs.first.id;
-
-    await _markAbsentStudents(formattedSelectedDate,
-        selectedSubjectDocId); // ใส่ parameter ให้กับฟังก์ชัน
-    // ขั้นตอนที่ 2: ดึงข้อมูลการเข้าเรียน
     final attendanceDocRef = FirebaseFirestore.instance
         .collection('users')
         .doc(userDocId)
@@ -224,6 +220,7 @@ class _HistoryState extends State<History> {
         .doc(formattedSelectedDate);
 
     final docSnapshot = await attendanceDocRef.get();
+
     if (!docSnapshot.exists) {
       print('No attendance data found for $formattedSelectedDate');
       setState(() {
@@ -235,13 +232,35 @@ class _HistoryState extends State<History> {
     final endDate =
         (docSnapshot.data() as Map<String, dynamic>)['endDate'] as Timestamp;
 
-    if (DateTime.now().isAfter(endDate.toDate())) {
-      await _markAbsentStudents(formattedSelectedDate, selectedSubjectDocId);
+    // Check if current time is before the end date
+    if (DateTime.now().isBefore(endDate.toDate())) {
+      // If it's before end time, show the dialog.
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('ยังไม่สามารถตรวจสอบได้!'),
+            content: Text('คุณไม่สามารถตรวจสอบได้จนกว่าเวลาเช็คชื่อจะหมด.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('ตกลง'),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return; // Return so that the rest of the function doesn't execute.
     }
+
+    // If it's after the end time, mark the absent students as absent.
+    await _markAbsentStudents(formattedSelectedDate, selectedSubjectDocId);
+
     final data = docSnapshot.data() as Map<String, dynamic>;
     final studentsChecked = (data['studentsChecked'] as List<dynamic>?) ?? [];
 
-    // Use setState to rebuild the widget with the new attendance list.
     setState(() {
       attendanceList = studentsChecked.map((student) {
         final studentMap = student as Map<String, dynamic>;
@@ -257,8 +276,6 @@ class _HistoryState extends State<History> {
         };
       }).toList();
       statusMessage = null;
-      print('Loaded ${attendanceList.length} attendances');
-      print('Attendance List: $attendanceList');
     });
   }
 

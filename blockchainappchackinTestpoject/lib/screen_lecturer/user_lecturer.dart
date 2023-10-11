@@ -158,7 +158,7 @@ class _UserLecturerState extends State<UserLecturer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('วิชาเรียน'),
+        title: const Text('Class'),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
