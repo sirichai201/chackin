@@ -55,7 +55,7 @@ class _SubjectDetailState extends State<SubjectDetail> {
               Text(subject['name'] ?? '', style: TextStyle(fontSize: 18)),
               SizedBox(height: 4),
               Text(
-                'Code: ${subject['code']}, Group: ${subject['group']}',
+                'รหัสวิชา: ${subject['code']}, หมู่เรียนที่: ${subject['group']}',
                 style: TextStyle(fontSize: 14),
               ),
             ],
@@ -112,7 +112,7 @@ class _SubjectDetailState extends State<SubjectDetail> {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.blueAccent),
       ),
-      child: Text('Invite Code: ${subject['inviteCode']}'),
+      child: Text('รหัสเชิญ: ${subject['inviteCode']}'),
     );
   }
 

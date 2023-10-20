@@ -45,8 +45,9 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
   LocationData? _locationData;
 
   // Constants for the university location and allowed distance
-  double universityLat = 17.272961;
-  double universityLong = 104.131919;
+  double universityLat = 17.273031;
+  double universityLong = 104.131854;
+
   double allowedDistance = 100.0; // in meters
 
   @override
@@ -257,8 +258,8 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
     print('Sending Ether to address: $receiverAddress...');
     print('Inside sendEther function with address: $receiverAddress');
 
-    final url = 'http://192.168.1.2:3000/sendEther';
-    //final url = 'http://10.0.2.2:3000/sendEther';
+    //final url = 'http://192.168.1.2:3000/sendEther';
+    final url = 'http://10.0.2.2:3000/sendEther';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -290,8 +291,8 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
   Future<void> getBalance(String ethAddress) async {
     print('Fetching balance for Ethereum address: $ethAddress...');
 
-    final url = 'http://192.168.1.2:3000/getBalance/$ethAddress';
-    //final url = 'http://10.0.2.2:3000/getBalance/$ethAddress';
+    //final url = 'http://192.168.1.2:3000/getBalance/$ethAddress';
+    final url = 'http://10.0.2.2:3000/getBalance/$ethAddress';
     final response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200) {
@@ -334,7 +335,7 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
           Text(widget.subjectName, style: const TextStyle(fontSize: 18)),
           const SizedBox(height: 4),
           Text(
-            'Code: ${widget.subjectCode}, Group: ${widget.subjectGroup}',
+            'รหัสวิชา: ${widget.subjectCode}, หมู่เรียนที่: ${widget.subjectGroup}',
             style: const TextStyle(fontSize: 14),
           ),
         ],
@@ -349,23 +350,23 @@ class _SubjectDetailNisitState extends State<SubjectDetailNisit> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm $actionName'),
+          title: Text('ยืนยันมาเรียนวิชา $actionName'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Are you sure you want to $actionName?'),
+                Text('คุณต้องการยืนยัน $actionName?'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text('ยกเลิก'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Confirm'),
+              child: Text('ยืนยัน'),
               onPressed: () {
                 Navigator.of(context).pop();
                 checkIn(status);

@@ -82,7 +82,7 @@ class _EditProfileLecturerState extends State<EditProfileLecturer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
+      appBar: AppBar(title: const Text('แก้ไข้โปรไฟล์')),
       body: _buildBody(),
     );
   }
@@ -95,15 +95,15 @@ class _EditProfileLecturerState extends State<EditProfileLecturer> {
         children: [
           _buildProfilePicture(),
           const SizedBox(height: 20),
-          _buildEditableTextField('Username:', _nameController),
+          _buildEditableTextField('ชื่อ:', _nameController),
           const SizedBox(height: 20),
-          _buildNonEditableTextField('Email:', widget.userData['email']),
+          _buildNonEditableTextField('อีเมล์:', widget.userData['email']),
           const SizedBox(height: 20),
-          _buildEditableTextField('Password:', _passwordController),
+          _buildEditableTextField('รหัสผ่าน:', _passwordController),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _saveProfileChanges,
-            child: const Text('Save Changes'),
+            child: const Text('บันทึก'),
           ),
         ],
       ),
@@ -225,17 +225,17 @@ class _EditProfileLecturerState extends State<EditProfileLecturer> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirmation'),
+          title: const Text('ต้องการยืนยันหรือไม่'),
           content: const Text(
               'การเปลี่ยนรหัสผ่านจะทําให้คุณต้องลงชื่อเข้าใช้อีกครั้ง คุณต้องการดําเนินการต่อหรือไม่?'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('No'),
+              child: const Text('ยกเลิก'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Yes'),
+              child: const Text('ยืนยัน'),
             ),
           ],
         );

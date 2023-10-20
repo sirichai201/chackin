@@ -142,7 +142,7 @@ class _LoginState extends State<Login> {
   Widget _buildUsernameField() {
     return TextField(
       controller: _usernameController,
-      decoration: const InputDecoration(labelText: 'Username'),
+      decoration: const InputDecoration(labelText: 'อีเมล์'),
     );
   }
 
@@ -150,14 +150,14 @@ class _LoginState extends State<Login> {
     return TextField(
       controller: _passwordController,
       obscureText: true,
-      decoration: const InputDecoration(labelText: 'Password'),
+      decoration: const InputDecoration(labelText: 'รหัสผ่าน'),
     );
   }
 
   Widget _loginButton(BuildContext context) {
     return ElevatedButton(
       onPressed: _login,
-      child: Text('Login', style: TextStyle(fontSize: 18)),
+      child: Text('เข้าสู่ระบบ', style: TextStyle(fontSize: 18)),
     );
   }
 
@@ -171,7 +171,7 @@ class _LoginState extends State<Login> {
           ),
         );
       },
-      child: const Text('Forgot Password?'),
+      child: const Text('ลืมรหัสผ่าน?'),
     );
   }
 }

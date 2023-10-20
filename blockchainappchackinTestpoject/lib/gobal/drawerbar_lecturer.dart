@@ -50,7 +50,7 @@ class DrawerbarLecturer extends StatelessWidget {
             ),
           ),
           _buildDrawerItem(
-            title: 'Class',
+            title: 'วิชาสอน',
             icon: Icons.book,
             onTap: () => Navigator.pushReplacement(
               context,
@@ -58,7 +58,7 @@ class DrawerbarLecturer extends StatelessWidget {
             ),
           ),
           _buildDrawerItem(
-            title: 'profile',
+            title: 'โปรไฟล์',
             icon: Icons.manage_accounts,
             onTap: () {
               Navigator.pushReplacement(

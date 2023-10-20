@@ -30,8 +30,8 @@ class _CheckInPageState extends State<CheckInPage> {
   bool _isChecking = false;
   Timer? _timer; // สร้างตัวแปร Timer
   late DateTime endDateTime;
-  double universityLat = 17.272961;
-  double universityLong = 104.131919;
+  double universityLat = 17.273031;
+  double universityLong = 104.131854;
   double allowedDistance = 100.0; // in meters
 
   bool isSettingsReady() {
@@ -244,7 +244,7 @@ class _CheckInPageState extends State<CheckInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Check-In Page'),
+        title: const Text('กำหนดเวลาเช็คชื่อ'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -254,7 +254,7 @@ class _CheckInPageState extends State<CheckInPage> {
               readOnly: true,
               controller: _dateController,
               decoration: InputDecoration(
-                labelText: 'Date',
+                labelText: 'วันที่',
                 suffixIcon: IconButton(
                   onPressed: _selectDate,
                   icon: const Icon(Icons.calendar_today),
@@ -265,7 +265,7 @@ class _CheckInPageState extends State<CheckInPage> {
               readOnly: true,
               controller: _startTimeController,
               decoration: InputDecoration(
-                labelText: 'Start Time',
+                labelText: 'เวลาเริ่ม',
                 suffixIcon: IconButton(
                   onPressed: _selectStartTime,
                   icon: const Icon(Icons.access_time),
@@ -276,7 +276,7 @@ class _CheckInPageState extends State<CheckInPage> {
               readOnly: true,
               controller: _endTimeController,
               decoration: InputDecoration(
-                labelText: 'End Time',
+                labelText: 'เวลาสิ้นสุด',
                 suffixIcon: IconButton(
                   onPressed: _selectEndTime,
                   icon: const Icon(Icons.access_time),
@@ -305,7 +305,7 @@ class _CheckInPageState extends State<CheckInPage> {
                 print(
                     'Is within university: ${isWithinUniversity(_locationData)}');
               },
-              child: const Text('Get Location '),
+              child: const Text('กำหนดตำแหน่ง '),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(

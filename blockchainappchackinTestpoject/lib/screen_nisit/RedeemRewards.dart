@@ -63,7 +63,7 @@ class _RedeemRewardsState extends State<RedeemRewards> {
 
   Future<double?> fetchUserEthereumBalance(String uid) async {
     // ใช้ uid ตรงนี้แทน currentUserUid
-    final url = 'http://192.168.1.2:3000/getBalance/$uid';
+    final url = 'http://10.0.2.2:3000/getBalance/$uid';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);

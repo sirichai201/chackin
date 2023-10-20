@@ -74,7 +74,7 @@ class DrawerBarNisit extends StatelessWidget {
             height: 20,
           ),
           _buildDrawerItem(
-            title: 'profile',
+            title: 'โปรไฟล์',
             icon: Icons.manage_accounts,
             onTap: () {
               Navigator.pushReplacement(

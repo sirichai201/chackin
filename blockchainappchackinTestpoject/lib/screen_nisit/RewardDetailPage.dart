@@ -35,7 +35,7 @@ class EthereumBalance with ChangeNotifier {
 
 class _RewardDetailPageState extends State<RewardDetailPage> {
   Future<bool> redeemRewardFromServer(String userAddress, double cost) async {
-    final url = 'http://192.168.1.2:3000/redeemReward';
+    final url = 'http://10.0.2.2:3000redeemReward';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -93,20 +93,26 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                 'ยอดเหรียญ Ethereum ของคุณ: ${currentBalance?.toStringAsFixed(2) ?? '0.00'} ETH'),
             SizedBox(height: 10.0),
             if (imageUrl.isNotEmpty) Image.network(imageUrl),
-            Text('Name: $name'),
-            Text('Cost: ${coin.toStringAsFixed(2)} coins'),
-            Text('Remaining Quantity: $remainingQuantity'),
-            ElevatedButton(
-              onPressed: () {
-                if (currentBalance >= coin) {
-                  _redeemReward(
-                      currentBalance); // ส่งค่า currentBalance เข้าไปใน _redeemReward
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('เหรียญ Ethereum ไม่เพียงพอสำหรับการแลก')));
-                }
-              },
-              child: Text('ยืนยันการแลกของรางวัล'),
+            Center(child: Text('ชื่อของรางวัล: $name')),
+            SizedBox(height: 10),
+            Center(child: Text('ราคา: ${coin.toStringAsFixed(2)} coins')),
+            SizedBox(height: 10),
+            Center(child: Text('จำนวนที่เหลืออยู่: $remainingQuantity')),
+            SizedBox(height: 10),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  if (currentBalance >= coin) {
+                    _redeemReward(
+                        currentBalance); // ส่งค่า currentBalance เข้าไปใน _redeemReward
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text('เหรียญ Ethereum ไม่เพียงพอสำหรับการแลก')));
+                  }
+                },
+                child: Text('ยืนยันการแลกของรางวัล'),
+              ),
             ),
           ],
         ),

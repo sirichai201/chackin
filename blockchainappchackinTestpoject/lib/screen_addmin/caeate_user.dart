@@ -73,7 +73,7 @@ class _CreateUserState extends State<CreateUser> {
           child: Text(value),
         );
       }).toList(),
-      hint: Text('เลือก Role'),
+      hint: Text('กำหนดผู้ใช้'),
     );
   }
 
@@ -83,7 +83,7 @@ class _CreateUserState extends State<CreateUser> {
     return TextField(
       controller: _usernameController,
       decoration: const InputDecoration(
-        labelText: 'Username',
+        labelText: 'ชื่อ',
       ),
     );
   }
@@ -94,7 +94,7 @@ class _CreateUserState extends State<CreateUser> {
       controller: _passwordController,
       obscureText: true,
       decoration: const InputDecoration(
-        labelText: 'Password',
+        labelText: 'รหัสผ่าน',
       ),
     );
   }
@@ -114,7 +114,7 @@ class _CreateUserState extends State<CreateUser> {
     return TextField(
       controller: _emailController,
       decoration: const InputDecoration(
-        labelText: 'email',
+        labelText: 'อีเมล์',
       ),
     );
   }

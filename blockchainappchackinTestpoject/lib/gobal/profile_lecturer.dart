@@ -63,7 +63,7 @@ class _profile_lecturerState extends State<profile_lecturer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: const Text('โปรไฟล์')),
       drawer: const DrawerbarLecturer(),
       body: _buildProfileBody(),
     );
@@ -118,13 +118,13 @@ class _profile_lecturerState extends State<profile_lecturer> {
         children: [
           const SizedBox(height: 15),
           Text(
-            'ชื่อนามสกุล: ${_userData['Username']}',
+            'ชื่อ: ${_userData['Username']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),
           const SizedBox(height: 10),
           Text(
-            'Email: ${_userData['email']}',
+            'อีเมล์: ${_userData['email']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 25),

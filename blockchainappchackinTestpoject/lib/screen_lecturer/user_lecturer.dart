@@ -158,7 +158,7 @@ class _UserLecturerState extends State<UserLecturer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Class'),
+        title: const Text('วิชาสอน'),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -224,7 +224,7 @@ class _UserLecturerState extends State<UserLecturer> {
                       ),
                     ),
                     subtitle: Text(
-                      'Code: ${subject['code']}, Group: ${subject['group']}, Invite Code: ${subject['inviteCode']}',
+                      'รหัสวิชา: ${subject['code']}, หมู่เรียนที่: ${subject['group']}, รหัสเชิญ: ${subject['inviteCode']}',
                       style: TextStyle(
                         color: Colors.grey[700], // ปรับสี
                         fontSize: 16, // ปรับขนาด

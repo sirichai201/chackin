@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: const Text('โปรไฟล์')),
       drawer: const DrawerBarNisit(),
       body: _buildProfileBody(),
     );
@@ -122,7 +122,7 @@ class _ProfileState extends State<Profile> {
           const SizedBox(height: 10),
           const SizedBox(height: 10),
           Text(
-            'Email: ${_userData['email']}',
+            'อีเมล์: ${_userData['email']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),

@@ -21,7 +21,7 @@ class _EditRewardPageState extends State<EditRewardPage> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String apiUrl =
-      "http://192.168.1.2:3000"; // เปลี่ยนเป็น IP และพอร์ตของเซิร์ฟเวอร์ของท่าน
+      "http://10.0.2.2:3000"; // เปลี่ยนเป็น IP และพอร์ตของเซิร์ฟเวอร์ของท่าน
   late TextEditingController _nameController;
   late TextEditingController _coinController;
   late TextEditingController _imageUrlController;
@@ -192,20 +192,20 @@ class _EditRewardPageState extends State<EditRewardPage> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: InputDecoration(labelText: 'ชื่อ'),
               validator: (value) =>
                   value!.isEmpty ? 'Please enter a name' : null,
             ),
             TextFormField(
               controller: _coinController,
-              decoration: InputDecoration(labelText: 'Coin Value'),
+              decoration: InputDecoration(labelText: 'ราคา'),
               keyboardType: TextInputType.number,
               validator: (value) =>
                   value!.isEmpty ? 'Please enter coin value' : null,
             ),
             TextFormField(
               controller: _quantityController,
-              decoration: InputDecoration(labelText: 'Quantity'),
+              decoration: InputDecoration(labelText: 'จำนวนสินค้า'),
               keyboardType: TextInputType.number,
               validator: (value) =>
                   value!.isEmpty ? 'Please enter quantity' : null,

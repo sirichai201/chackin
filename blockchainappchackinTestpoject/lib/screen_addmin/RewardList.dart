@@ -42,39 +42,49 @@ class _RewardsListState extends State<RewardsList> {
               data['id'] = reward.id; // ใส่ id ในข้อมูล reward
 
               final name = data['name'] ?? 'No Name';
-              final coin = (data['coin'] is double) 
-                          ? data['coin'].toStringAsFixed(2) 
-                          : data['coin'].toString(); // Display as decimal if double
+              final coin = (data['coin'] is double)
+                  ? data['coin'].toStringAsFixed(2)
+                  : data['coin'].toString(); // Display as decimal if double
               final quantity = data['quantity']?.toString() ?? 'No Quantity';
               final imageUrl = data['imageUrl'];
 
               return ListTile(
                 title: Text(name),
-                subtitle: Text('Coin: $coin Quantity: $quantity'),
+                subtitle: Text('ราคา: $coin จำนวนสินค้า: $quantity'),
                 leading: imageUrl != null
-                  ? Image.network(imageUrl, width: 50, fit: BoxFit.cover,)
-                  : Icon(Icons.image_not_supported),
+                    ? Image.network(
+                        imageUrl,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      )
+                    : Icon(Icons.image_not_supported),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.edit, color: Colors.blue,),
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.blue,
+                      ),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => EditRewardPage(reward: data), 
+                            builder: (context) => EditRewardPage(reward: data),
                           ),
                         );
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red,),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                       onPressed: () async {
                         await showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text('Confirm Delete'),
-                            content: Text('Are you sure you want to delete $name?'),
+                            title: Text('ยืนยันการลบ'),
+                            content: Text('คุณต้องการลบของรางวัลชื่อ $name?'),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.of(context).pop(),
