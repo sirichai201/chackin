@@ -122,7 +122,7 @@ class _ProfileState extends State<Profile> {
           const SizedBox(height: 10),
           const SizedBox(height: 10),
           Text(
-            'อีเมล์: ${_userData['email']}',
+            'อีเมล: ${_userData['email']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),

@@ -114,7 +114,7 @@ class _CreateUserState extends State<CreateUser> {
     return TextField(
       controller: _emailController,
       decoration: const InputDecoration(
-        labelText: 'อีเมล์',
+        labelText: 'อีเมล',
       ),
     );
   }

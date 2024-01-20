@@ -142,7 +142,7 @@ class _LoginState extends State<Login> {
   Widget _buildUsernameField() {
     return TextField(
       controller: _usernameController,
-      decoration: const InputDecoration(labelText: 'อีเมล์'),
+      decoration: const InputDecoration(labelText: 'อีเมล'),
     );
   }
 

@@ -97,7 +97,7 @@ class _EditProfileLecturerState extends State<EditProfileLecturer> {
           const SizedBox(height: 20),
           _buildEditableTextField('ชื่อ:', _nameController),
           const SizedBox(height: 20),
-          _buildNonEditableTextField('อีเมล์:', widget.userData['email']),
+          _buildNonEditableTextField('อีเมล:', widget.userData['email']),
           const SizedBox(height: 20),
           _buildEditableTextField('รหัสผ่าน:', _passwordController),
           const SizedBox(height: 20),

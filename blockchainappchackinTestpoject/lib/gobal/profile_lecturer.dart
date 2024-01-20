@@ -124,7 +124,7 @@ class _profile_lecturerState extends State<profile_lecturer> {
           const SizedBox(height: 10),
           const SizedBox(height: 10),
           Text(
-            'อีเมล์: ${_userData['email']}',
+            'อีเมล: ${_userData['email']}',
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 25),

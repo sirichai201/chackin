@@ -89,7 +89,7 @@ class _EditProfileState extends State<EditProfile> {
           const SizedBox(height: 20),
           _buildEditableTextField('ชื่อ:', _nameController),
           const SizedBox(height: 20),
-          _buildNonEditableTextField('อีเมล์:', widget.userData['email']),
+          _buildNonEditableTextField('อีเมล:', widget.userData['email']),
           const SizedBox(height: 20),
           _buildNonEditableTextField(
               'รหัสนิสิต:', widget.userData['studentId']),
